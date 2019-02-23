@@ -24,6 +24,22 @@ public class KeyEventDemo extends JFrame implements KeyListener, ActionListener 
 	static final String newline = System.getProperty("line.separator");
 
 	public static void main(String[] args) throws IOException {
+		/*String a = "blaaaaa: a :123412.1231231";
+		int countcolon = 0;
+		String number = null;
+		for(int i = 0; i < a.length(); i++)
+		{
+			if(a.charAt(i) == ':')
+				countcolon++;
+			if(countcolon == 1)
+			{
+				number = a.substring(i+2);
+			}
+		}
+		double num = Double.parseDouble(number);
+		System.out.println(number + "\t" + num);
+		*/
+		
 		/* Use an appropriate Look and Feel */
 		try {
 			// UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -48,6 +64,7 @@ public class KeyEventDemo extends JFrame implements KeyListener, ActionListener 
 				createAndShowGUI();
 			}
 		});
+		
 		
 	}
 
@@ -167,23 +184,15 @@ public class KeyEventDemo extends JFrame implements KeyListener, ActionListener 
 		letters.add(keyStatus);
 
 		timing.add(java.time.LocalTime.now());
-
+		
 		keysstring.add(keyString);
 		FileWriter fstream = new FileWriter("out.txt");
 		BufferedWriter out = new BufferedWriter(fstream);
-		System.out.println(letters.size());
 		for(int i = 0; i < letters.size(); i++)
 		{
 			out.write(letters.get(i) + "\t" + keysstring.get(i) + "\t" + timing.get(i) + "\n");
 		}
-		// Close the output stream
 		out.close();
-		//System.out.println(letters.get(counterrrr) + "\t" + keysstring.get(counterrrr) + "\t" + timing.get(counterrrr));
-		/*
-		 * displayArea.append(keyStatus + newline + "    " + keyString + newline
-		 * + "    " + java.time.LocalTime.now() + newline);
-		 * displayArea.setCaretPosition(displayArea.getDocument().getLength());
-		 */
-		//counterrrr++;
+		
 	}
 }

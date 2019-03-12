@@ -14,16 +14,17 @@ public class KeyEventDemo extends JFrame implements KeyListener, ActionListener 
 	/**
 	 * 
 	 */
-	static ArrayList<String> letters = new ArrayList<String>();
-	static ArrayList<LocalTime> timing = new ArrayList<LocalTime>();
-	static ArrayList<String> keysstring = new ArrayList<String>();
-
+	ArrayList<String> letters = new ArrayList<String>();
+	ArrayList<LocalTime> timing = new ArrayList<LocalTime>();
+	ArrayList<String> keysstring = new ArrayList<String>();
+	static int global;
 	private static final long serialVersionUID = -100468474145156277L;
 	JTextArea displayArea;
 	JTextField typingArea;
 	static final String newline = System.getProperty("line.separator");
 
-	public static void main(String[] args) throws IOException {
+	public static void main(int k) throws IOException {
+		
 		/*String a = "blaaaaa: a :123412.1231231";
 		int countcolon = 0;
 		String number = null;
@@ -39,7 +40,7 @@ public class KeyEventDemo extends JFrame implements KeyListener, ActionListener 
 		double num = Double.parseDouble(number);
 		System.out.println(number + "\t" + num);
 		*/
-		
+		global = k;
 		/* Use an appropriate Look and Feel */
 		try {
 			// UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -154,14 +155,7 @@ public class KeyEventDemo extends JFrame implements KeyListener, ActionListener 
 		// Return the focus to the typing area.
 		typingArea.requestFocusInWindow();
 	}
-
-	/*
-	 * We have to jump through some hoops to avoid trying to print non-printing
-	 * characters such as Shift. (Not only do they not print, but if you put
-	 * them in a String, the characters afterward won't show up in the text
-	 * area.)
-	 */
-
+	
 	int counterrrr = 0;
 	/* THIS IS WHERE I SAVE THE KEYPRESS KEYRELEASE AND KEYTYPED INTO THE .TXT FILE 
 	 * 
@@ -186,7 +180,7 @@ public class KeyEventDemo extends JFrame implements KeyListener, ActionListener 
 		timing.add(java.time.LocalTime.now());
 		
 		keysstring.add(keyString);
-		FileWriter fstream = new FileWriter("out.txt");
+		FileWriter fstream = new FileWriter("out"+global+".txt");
 		BufferedWriter out = new BufferedWriter(fstream);
 		for(int i = 0; i < letters.size(); i++)
 		{

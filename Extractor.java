@@ -57,6 +57,8 @@ public class Extractor {
 				}
 			}
 			num = Double.parseDouble(number);
+			if(num < 10.0)
+				num = num + 60;
 			timings.add(num);
 			countcolon = 0;
 			number = null;

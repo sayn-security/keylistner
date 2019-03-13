@@ -9,34 +9,26 @@ public class Extractor {
 	ArrayList<String> release = new ArrayList<String>();
 	ArrayList<Double> releaseTime = new ArrayList<Double>();
 	ArrayList<Double> timings = new ArrayList<Double>();
-	
+
 	ArrayList<Double> holdTime = new ArrayList<Double>();
 	ArrayList<Double> flightTime = new ArrayList<Double>();
 	ArrayList<Double> threeGramTime = new ArrayList<Double>();
 	private BufferedReader bc;
 
-	/*public static void main(String[] args) throws IOException {
-		Extractor z = new Extractor();
-		z.reading();
-		z.splitter();
-		z.holdTimeExtractor();
-		z.flight();
-		z.threeGram();
-		for (int i = 0; i < z.flightTime.size(); i++) {
-			System.out.println(z.flightTime.get(i));
-		}
-		for (int i = 0; i < z.holdTime.size(); i++) {
-			System.out.println(z.holdTime.get(i));
-		}
-		for (int i = 0; i < z.threeGramTime.size(); i++) {
-			System.out.println(z.threeGramTime.get(i));
-		}
-		
-		System.out.println(z.totalTime());
-	}*/
+	/*
+	 * public static void main(String[] args) throws IOException { Extractor z =
+	 * new Extractor(); z.reading(); z.splitter(); z.holdTimeExtractor();
+	 * z.flight(); z.threeGram(); for (int i = 0; i < z.flightTime.size(); i++)
+	 * { System.out.println(z.flightTime.get(i)); } for (int i = 0; i <
+	 * z.holdTime.size(); i++) { System.out.println(z.holdTime.get(i)); } for
+	 * (int i = 0; i < z.threeGramTime.size(); i++) {
+	 * System.out.println(z.threeGramTime.get(i)); }
+	 * 
+	 * System.out.println(z.totalTime()); }
+	 */
 
 	public void reading(int k) throws IOException {
-		FileReader ab = new FileReader("out"+k+".txt");
+		FileReader ab = new FileReader("out" + k + ".txt");
 		bc = new BufferedReader(ab);
 
 		String temp;
@@ -57,7 +49,7 @@ public class Extractor {
 				}
 			}
 			num = Double.parseDouble(number);
-			if(num < 10.0)
+			if (num <= 2.0)
 				num = num + 60;
 			timings.add(num);
 			countcolon = 0;

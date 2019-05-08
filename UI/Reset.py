@@ -7,9 +7,20 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from Login import Ui_LOGIN
 
 
 class Ui_reset(object):
+
+    def backlogin_button(self):
+        self.window=QtWidgets.QMainWindow()
+        self.ui=Ui_LOGIN()
+        self.ui.setupUi(self.window)
+        reset.hide()
+        self.window.show()
+
+
+
     def setupUi(self, reset):
         reset.setObjectName("reset")
         reset.resize(1380, 800)
@@ -78,6 +89,16 @@ class Ui_reset(object):
 "background-color: rgb(255, 255, 255);")
         self.image.setText("")
         self.image.setObjectName("image")
+
+        self.backbutton = QtWidgets.QPushButton(self.centralwidget)
+        self.backbutton.setGeometry(QtCore.QRect(30, 20, 71, 41))
+        self.backbutton.setStyleSheet("background-color: rgb(32, 151, 255);\n"
+"image: url(arrow 4.png);")
+        self.backbutton.setText("")
+        self.backbutton.setObjectName("backbutton")
+
+        self.backbutton.clicked.connect(self.backlogin_button)
+
         reset.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(reset)
         self.statusbar.setObjectName("statusbar")

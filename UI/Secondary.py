@@ -7,10 +7,18 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from registration import *
 
 order=[]
 
 class Ui_secondary(object):
+
+    def backlogin_button(self):
+        self.window=QtWidgets.QMainWindow()
+        self.ui=Ui_Registration()
+        self.ui.setupUi(self.window)
+        secondary.hide()
+        self.window.show()
     
     def get_pic1(self):
             order.insert(1,'1')
@@ -136,6 +144,15 @@ class Ui_secondary(object):
         self.dog2.setObjectName("8")
 
         self.dog2.clicked.connect(self.get_pic8)
+
+        self.backbutton = QtWidgets.QPushButton(self.centralwidget)
+        self.backbutton.setGeometry(QtCore.QRect(30, 20, 71, 41))
+        self.backbutton.setStyleSheet("background-color: rgb(32, 151, 255);\n"
+"image: url(arrow 4.png);")
+        self.backbutton.setText("")
+        self.backbutton.setObjectName("backbutton")
+
+        self.backbutton.clicked.connect(self.backlogin_button)
 
         self.submit = QtWidgets.QPushButton(self.centralwidget)
         self.submit.setGeometry(QtCore.QRect(920, 650, 151, 31))

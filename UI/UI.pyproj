@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{417a20e3-a39a-416b-9208-e8ff445133d3}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>Reset.py</StartupFile>
+    <StartupFile>Login.py</StartupFile>
     <SearchPath />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -37,6 +37,9 @@
     <Content Include="unfaded.png" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Check_Code.py" />
+    <Compile Include="Correct_password.py" />
+    <Compile Include="Incorrect_password.py" />
     <Compile Include="KeyListener.py" />
     <Compile Include="knn.py" />
     <Compile Include="Login.py" />

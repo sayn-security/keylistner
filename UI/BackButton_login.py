@@ -1,86 +1,18 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'Login.ui'
+# Form implementation generated from reading ui file 'BackButton_login.ui'
 #
 # Created by: PyQt5 UI code generator 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
-import PyQt5
+
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
-from pynput import keyboard
-import time
-import decimal
-import xlsxwriter
-import KeyListener as kl
-from threading import Thread
-import time
-import tkinter
-from multiprocessing import Process
-from Reset import Ui_reset
-from Correct_password import Ui_correctpassword
-from Incorrect_password import Ui_Incorrectpassword
 
 
 class Ui_LOGIN(object):
-    
-    
-
-    
-    
-    def check_passlog(self):
-        usdata1=self.passwordbox.text()
-        usdoc1= open("temp_pass.txt","w")
-        usdoc1.write(usdata1)
-        usdoc1.close()
-        temppass= open("temp_pass.txt","r")
-        regpass=open("regpass.txt","r")
-        if (temppass.mode=="r") & (regpass.mode=="r"):
-                tp=temppass.read()
-                rp=regpass.read()
-        if(tp == rp):
-            print("Correct Password")
-            self.passwordcor()
-        else:
-            print("Incorrect Password")
-            self.passwordincor()
-        temppass.close()
-        regpass.close()
-
-    def passwordcor(self):
-        self.window=QtWidgets.QMainWindow()
-        self.ui=Ui_correctpassword()
-        self.ui.setupUi(self.window)
-        self.window.show()
-      
-    def passwordincor(self):
-        self.window1=QtWidgets.QMainWindow()
-        self.ui1=Ui_Incorrectpassword()
-        self.ui1.setupUi(self.window1)
-        self.window1.show()        
-
-    def reset_button(self):
-        self.window2=QtWidgets.QMainWindow()
-        self.ui2=Ui_reset()
-        self.ui2.setupUi(self.window2)
-        LOGIN.hide()
-        self.window2.show()
-
-    def keyPressEvent(self, e):
-        print ("event", e)
-        if e.key()  == QtCore.Qt.Key_Return :
-            self.check_passlog()
-        elif e.key() == QtCore.Qt.Key_Enter :   
-            self.check_passlog()
-    
-    
-
     def setupUi(self, LOGIN):
-        
         LOGIN.setObjectName("LOGIN")
-        LOGIN.resize(1350, 800)
+        LOGIN.resize(846, 729)
         LOGIN.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.centralwidget = QtWidgets.QWidget(LOGIN)
         self.centralwidget.setObjectName("centralwidget")
@@ -93,8 +25,14 @@ class Ui_LOGIN(object):
         self.sayn.setStyleSheet("color: rgb(255, 255, 255);")
         self.sayn.setAlignment(QtCore.Qt.AlignCenter)
         self.sayn.setObjectName("sayn")
-       
-
+        self.username = QtWidgets.QLabel(self.centralwidget)
+        self.username.setGeometry(QtCore.QRect(550, 300, 111, 21))
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        self.username.setFont(font)
+        self.username.setStyleSheet("color: rgb(32, 151, 255);\n"
+"")
+        self.username.setObjectName("username")
         self.password = QtWidgets.QLabel(self.centralwidget)
         self.password.setGeometry(QtCore.QRect(550, 400, 111, 16))
         font = QtGui.QFont()
@@ -102,13 +40,14 @@ class Ui_LOGIN(object):
         self.password.setFont(font)
         self.password.setStyleSheet("color: rgb(32, 151, 255);")
         self.password.setObjectName("password")
-
-
+        self.userbox = QtWidgets.QLineEdit(self.centralwidget)
+        self.userbox.setGeometry(QtCore.QRect(550, 330, 311, 31))
+        self.userbox.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.userbox.setObjectName("userbox")
         self.passwordbox = QtWidgets.QLineEdit(self.centralwidget)
         self.passwordbox.setGeometry(QtCore.QRect(550, 430, 311, 31))
         self.passwordbox.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.passwordbox.setObjectName("passwordbox")
-        self.passwordbox.thread()
         self.loginbutton = QtWidgets.QPushButton(self.centralwidget)
         self.loginbutton.setGeometry(QtCore.QRect(630, 490, 151, 31))
         font = QtGui.QFont()
@@ -117,14 +56,6 @@ class Ui_LOGIN(object):
         self.loginbutton.setStyleSheet("background-color: rgb(32, 151, 255);\n"
 "color: rgb(255, 255, 255);")
         self.loginbutton.setObjectName("loginbutton")
-
-        
-        
-        
-
-        self.loginbutton.clicked.connect(self.check_passlog)
-        
-        
         self.resetbutton = QtWidgets.QPushButton(self.centralwidget)
         self.resetbutton.setGeometry(QtCore.QRect(630, 580, 151, 31))
         font = QtGui.QFont()
@@ -134,13 +65,6 @@ class Ui_LOGIN(object):
 "color: rgb(255, 255, 255);\n"
 "")
         self.resetbutton.setObjectName("resetbutton")
-
-        
-        self.resetbutton.clicked.connect(self.reset_button)
-
-
-
-
         self.line = QtWidgets.QFrame(self.centralwidget)
         self.line.setGeometry(QtCore.QRect(620, 540, 51, 21))
         font = QtGui.QFont()
@@ -179,53 +103,41 @@ class Ui_LOGIN(object):
         self.image.setGeometry(QtCore.QRect(630, 90, 141, 131))
         self.image.setStyleSheet("border-radius: 60px;\n"
 "background-color: rgb(255, 255, 255);\n"
-"image: url(3.png);")
+"image: url(:/is/3.png);")
         self.image.setText("")
         self.image.setObjectName("image")
+        self.backbutton = QtWidgets.QPushButton(self.centralwidget)
+        self.backbutton.setGeometry(QtCore.QRect(30, 20, 71, 41))
+        self.backbutton.setStyleSheet("background-color: rgb(32, 151, 255);\n"
+"image: url(:/asl/arrow 4.png);")
+        self.backbutton.setText("")
+        self.backbutton.setObjectName("backbutton")
         LOGIN.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(LOGIN)
         self.statusbar.setObjectName("statusbar")
         LOGIN.setStatusBar(self.statusbar)
 
-
-        
-
         self.retranslateUi(LOGIN)
         QtCore.QMetaObject.connectSlotsByName(LOGIN)
-        self.centralwidget.keyPressEvent = self.keyPressEvent
 
     def retranslateUi(self, LOGIN):
         _translate = QtCore.QCoreApplication.translate
         LOGIN.setWindowTitle(_translate("LOGIN", "Login"))
         self.sayn.setText(_translate("LOGIN", "SAYN SECURITIES"))
+        self.username.setText(_translate("LOGIN", "Username"))
         self.password.setText(_translate("LOGIN", "Password"))
         self.loginbutton.setText(_translate("LOGIN", "LOGIN"))
         self.resetbutton.setText(_translate("LOGIN", "Reset Password"))
         self.ORtext.setText(_translate("LOGIN", "OR"))
-        
-    
-        
 
 
 
 
-def main():
-    
+if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     LOGIN = QtWidgets.QMainWindow()
     ui = Ui_LOGIN()
     ui.setupUi(LOGIN)
-    x=Thread(target=LOGIN.showFullScreen())
-    x.start()    
-    app.processEvents()
-    #time.sleep(5)
-    y=Thread(target=kl.keylis())
-    y.start()
-    x.join()
-    y.join()
+    LOGIN.show()
     sys.exit(app.exec_())
-
-if __name__ == "__main__":
-    main()
-    

@@ -7,12 +7,13 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from Login import Ui_LOGIN
+
 
 
 class Ui_Incorrectpassword(object):
 
     def logininter(self):
+        from Login import Ui_LOGIN
         self.window=QtWidgets.QMainWindow()
         self.ui=Ui_LOGIN()
         self.ui.setupUi(self.window)

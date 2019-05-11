@@ -7,12 +7,13 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from Secondary import  Ui_secondary
+
 
 
 class Ui_Registration(object):
 
     def next_button(self):
+        from Secondary import  Ui_secondary
         self.window= QtWidgets.QMainWindow()
         self.ui=Ui_secondary()
         self.ui.setupUi(self.window)

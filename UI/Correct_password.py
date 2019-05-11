@@ -7,12 +7,13 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from Secondary_2 import *
 
+from Secondary_2 import Ui_Secondary_Password
 
 class Ui_correctpassword(object):
 
     def secpass(self):
+        
         self.window=QtWidgets.QMainWindow()
         self.ui=Ui_Secondary_Password()
         self.ui.setupUi(self.window)

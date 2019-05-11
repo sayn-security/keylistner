@@ -7,17 +7,20 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from Login import Ui_LOGIN
+
 
 
 class Ui_reset(object):
 
     def backlogin_button(self):
+        from Login import Ui_LOGIN
         self.window=QtWidgets.QMainWindow()
         self.ui=Ui_LOGIN()
         self.ui.setupUi(self.window)
         reset.hide()
         self.window.show()
+    
+
 
 
 

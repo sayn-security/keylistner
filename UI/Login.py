@@ -19,17 +19,30 @@ from threading import Thread
 import time
 import tkinter
 from multiprocessing import Process
-from Reset import Ui_reset
 from Correct_password import Ui_correctpassword
 from Incorrect_password import Ui_Incorrectpassword
+
 
 
 class Ui_LOGIN(object):
     
     
+    def keyPressEvent(self, e):
+        print ("event", e)
+        if e.key()  == QtCore.Qt.Key_Return :
+            self.check_passlog()
+        elif e.key() == QtCore.Qt.Key_Enter :   
+            self.check_passlog()
+    
+    def reset_button(self):
+        from Reset import Ui_reset
+        self.window=QtWidgets.QMainWindow()
+        self.ui=Ui_reset()
+        self.ui.setupUi(self.window)
+        LOGIN.hide()
+        self.window.show()
 
-    
-    
+
     def check_passlog(self):
         usdata1=self.passwordbox.text()
         usdoc1= open("temp_pass.txt","w")
@@ -50,30 +63,21 @@ class Ui_LOGIN(object):
         regpass.close()
 
     def passwordcor(self):
+       
         self.window=QtWidgets.QMainWindow()
         self.ui=Ui_correctpassword()
         self.ui.setupUi(self.window)
         self.window.show()
       
     def passwordincor(self):
-        self.window1=QtWidgets.QMainWindow()
-        self.ui1=Ui_Incorrectpassword()
-        self.ui1.setupUi(self.window1)
-        self.window1.show()        
+        self.window=QtWidgets.QMainWindow()
+        self.ui=Ui_Incorrectpassword()
+        self.ui.setupUi(self.window)
+        self.window.show()        
 
-    def reset_button(self):
-        self.window2=QtWidgets.QMainWindow()
-        self.ui2=Ui_reset()
-        self.ui2.setupUi(self.window2)
-        LOGIN.hide()
-        self.window2.show()
+    
 
-    def keyPressEvent(self, e):
-        print ("event", e)
-        if e.key()  == QtCore.Qt.Key_Return :
-            self.check_passlog()
-        elif e.key() == QtCore.Qt.Key_Enter :   
-            self.check_passlog()
+    
     
     
 

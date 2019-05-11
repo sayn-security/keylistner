@@ -7,13 +7,14 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from registration import *
+
 
 order=[]
 
 class Ui_secondary(object):
 
     def backlogin_button(self):
+        from registration import Ui_Registration
         self.window=QtWidgets.QMainWindow()
         self.ui=Ui_Registration()
         self.ui.setupUi(self.window)

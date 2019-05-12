@@ -7,42 +7,21 @@
 # WARNING! All changes made in this file will be lost!
 import PyQt5
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
+#from Reset import Ui_reset
 from pynput import keyboard
+import keyboard as newKeyboard
 import time
 import decimal
 import xlsxwriter
-import KeyListener as kl
+#import keylistenNew as kl
 from threading import Thread
 import time
 import tkinter
-from multiprocessing import Process
-from Correct_password import Ui_correctpassword
-from Incorrect_password import Ui_Incorrectpassword
-
 
 
 class Ui_LOGIN(object):
-    
-    
-    def keyPressEvent(self, e):
-        print ("event", e)
-        if e.key()  == QtCore.Qt.Key_Return :
-            self.check_passlog()
-        elif e.key() == QtCore.Qt.Key_Enter :   
-            self.check_passlog()
-    
-    def reset_button(self):
-        from Reset import Ui_reset
-        self.window=QtWidgets.QMainWindow()
-        self.ui=Ui_reset()
-        self.ui.setupUi(self.window)
-        LOGIN.hide()
-        self.window.show()
 
-
+    
     def check_passlog(self):
         usdata1=self.passwordbox.text()
         usdoc1= open("temp_pass.txt","w")
@@ -55,34 +34,22 @@ class Ui_LOGIN(object):
                 rp=regpass.read()
         if(tp == rp):
             print("Correct Password")
-            self.passwordcor()
         else:
             print("Incorrect Password")
-            self.passwordincor()
         temppass.close()
         regpass.close()
-
-    def passwordcor(self):
-       
-        self.window=QtWidgets.QMainWindow()
-        self.ui=Ui_correctpassword()
-        self.ui.setupUi(self.window)
-        self.window.show()
+        #read the hash method
+        #testing
       
-    def passwordincor(self):
+    
+    def reset_button(self):
         self.window=QtWidgets.QMainWindow()
-        self.ui=Ui_Incorrectpassword()
+        self.ui=Ui_reset()
         self.ui.setupUi(self.window)
-        self.window.show()        
-
-    
-
-    
-    
-    
+        LOGIN.hide()
+        self.window.show()
 
     def setupUi(self, LOGIN):
-        
         LOGIN.setObjectName("LOGIN")
         LOGIN.resize(1350, 800)
         LOGIN.setStyleSheet("background-color: rgb(0, 0, 0);")
@@ -109,10 +76,10 @@ class Ui_LOGIN(object):
 
 
         self.passwordbox = QtWidgets.QLineEdit(self.centralwidget)
+        self.passwordbox.setEchoMode(QtWidgets.QLineEdit.Password)
         self.passwordbox.setGeometry(QtCore.QRect(550, 430, 311, 31))
         self.passwordbox.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.passwordbox.setObjectName("passwordbox")
-        self.passwordbox.thread()
         self.loginbutton = QtWidgets.QPushButton(self.centralwidget)
         self.loginbutton.setGeometry(QtCore.QRect(630, 490, 151, 31))
         font = QtGui.QFont()
@@ -128,7 +95,6 @@ class Ui_LOGIN(object):
 
         self.loginbutton.clicked.connect(self.check_passlog)
         
-        
         self.resetbutton = QtWidgets.QPushButton(self.centralwidget)
         self.resetbutton.setGeometry(QtCore.QRect(630, 580, 151, 31))
         font = QtGui.QFont()
@@ -141,9 +107,6 @@ class Ui_LOGIN(object):
 
         
         self.resetbutton.clicked.connect(self.reset_button)
-
-
-
 
         self.line = QtWidgets.QFrame(self.centralwidget)
         self.line.setGeometry(QtCore.QRect(620, 540, 51, 21))
@@ -191,12 +154,9 @@ class Ui_LOGIN(object):
         self.statusbar.setObjectName("statusbar")
         LOGIN.setStatusBar(self.statusbar)
 
-
-        
-
         self.retranslateUi(LOGIN)
         QtCore.QMetaObject.connectSlotsByName(LOGIN)
-        self.centralwidget.keyPressEvent = self.keyPressEvent
+        
 
     def retranslateUi(self, LOGIN):
         _translate = QtCore.QCoreApplication.translate
@@ -206,30 +166,94 @@ class Ui_LOGIN(object):
         self.loginbutton.setText(_translate("LOGIN", "LOGIN"))
         self.resetbutton.setText(_translate("LOGIN", "Reset Password"))
         self.ORtext.setText(_translate("LOGIN", "OR"))
+
+
         
+
+def keylistener():
+    a = []
+    tim = []
+    pr = []
+    rl = []
+    prt = []
+    rlt = []
+    hold = []
+    flight = []
+    master = []
+    ngram = []
     
+
+    def on_press(event):
+        key = event.name
+        print(key,"\t enter")
+        if key is "enter":
+        # Stop listener                i = 0
+            print("ended")
+            from write_to_sheet import write2sheet
+            y=Thread(target=write2sheet(a, tim, pr, rl, prt, rlt, hold, flight, master, ngram), daemon=True)
+            y.start()
+            print ("recorded one password entery")
+            return False
+        else:
+            value = str(key)
+            #value = value.replace("'", "")
+            #if value[0] is "K":
+            #    value = value.replace("Key.", "Pressed :\t")
+            #if value[0] is "u":
+            #    value = value[1:]
+            #    value = "Pressed :\t"+value
+            pr.append(value)
+            prt.append(decimal.Decimal(time.time()))
+            a.append(value)
+            tim.append(decimal.Decimal(time.time()))
         
 
+    def on_release(event):
+        key = event.text
+        
+        if key is "enter":
+            # Stop listener
+            
+            return False
+    
+        value = str(key)
+        #value = value.replace("'", "")
+        #if value[0] is "K":
+        #    value = value.replace("Key.", "Released :\t")
+        #if value[0] is "u":
+        #    value = value[1:]
+        #    value = "Released :\t"+value
+        rl.append(value)
+        rlt.append(decimal.Decimal(time.time()))
+        a.append(value)
+        tim.append(decimal.Decimal(time.time()))
 
+    newKeyboard.block_key("left windows")
+    newKeyboard.on_press(on_press)
+    newKeyboard.on_release(on_release)
+    print("keylogger running")
 
 
 def main():
-    
+    keylistener()
+
     import sys
     app = QtWidgets.QApplication(sys.argv)
     LOGIN = QtWidgets.QMainWindow()
     ui = Ui_LOGIN()
-    ui.setupUi(LOGIN)
-    x=Thread(target=LOGIN.showFullScreen())
-    x.start()    
+    ui.setupUi(LOGIN);
+    
+    #y=Thread(target=kl.keylistener(), daemon=True)
+    #y.start()
+    #print("it ran past")
+
+    x=Thread(target=LOGIN.show(),args=(1,))
+    x.run()    
     app.processEvents()
-    #time.sleep(5)
-    y=Thread(target=kl.keylis())
-    y.start()
-    x.join()
-    y.join()
-    sys.exit(app.exec_())
+    #time.sleep(2)
+    
+    execu=app.exec()
+    sys.exit(execu)
 
 if __name__ == "__main__":
     main()
-    
